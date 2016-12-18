@@ -1,6 +1,6 @@
 # Rigol DM3068 Multi Meter Python Measurement Script
 
-# Import the libraries for the Rigol DM3068 Multi Meter 
+# Import the libraries for the Rigol DM3068 Multi Meter. 
 import usbtmc
 import vxi11
 import serial

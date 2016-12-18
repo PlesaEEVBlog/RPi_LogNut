@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Simple example to show the current display of a Rigol DM3068 MultiMeter in a webpage
+# Simple example to show the current display of a Rigol DM3068 MultiMeter in a webpage.
 
 import BaseHTTPServer
 import vxi11

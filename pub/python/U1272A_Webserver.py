@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Simple example to show the current display of a Rigol DM3068 MultiMeter in a webpage
+# Simple example to show the current display of a Keysight U1272A Multi Meter in a webpage
 
 import BaseHTTPServer
 import vxi11
@@ -23,7 +23,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	  self.send_response(200)
 	  self.send_header('Content-type', 'text/html')
 	  self.end_headers()
-	  self.wfile.write('<html><head><title>Rigol DM3068 Multi Meter Network Measurement</title><meta http-equiv="refresh" content="1"></head>')
+	  self.wfile.write('<html><head><title>Keysight U1272A Multi Meter Network Measurement</title><meta http-equiv="refresh" content="1"></head>')
 	  measurevalue = str(float(send_receive('FETC?')))
 	  self.wfile.write('<body><p style="font-family:courier;font-size:48pt;">' + measurevalue + ' Volts </p>')
 	  self.wfile.write('</body></html>')

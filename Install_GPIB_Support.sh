@@ -20,7 +20,7 @@ then
   done
 else
   echo "Proper kernel detected"
-  read -rsp $'Press enter to continue...\n'
+  read -p "Press enter to continue"
 fi
 
 sudo apt-get update

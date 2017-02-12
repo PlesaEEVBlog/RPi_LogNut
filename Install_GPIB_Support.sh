@@ -14,6 +14,7 @@ then
   sudo apt-get update
   sudo apt-get -y upgrade
   sudo apt-get -y dist-upgrade
+  sudo apt-get -y remove raspberrypi-kernel
   sudo apt-get -y install raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-bootloader
   echo "Raspberry Pi needs to reboot to load new kernel and then run script again"
   read -p "Press enter to continue"

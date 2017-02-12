@@ -17,7 +17,7 @@ then
   sudo apt-get -y install raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-bootloader
   echo "Raspberry Pi needs to reboot to load new kernel and then run script again"
   read -p "Press enter to continue"
-  done
+  exit
 else
   echo "Proper kernel detected"
   read -p "Press enter to continue"

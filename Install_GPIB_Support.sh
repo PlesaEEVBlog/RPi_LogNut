@@ -77,7 +77,3 @@ sudo sed -i 's/ni_pci/ni_usb_b/g' /etc/gpib.conf
 echo "National Instruments NI GPIB-USB-HS found"
 sudo modprobe ni_usb_gpib
 fi
-
-sudo ldconfig
-sudo depmod -a
-sudo gpib_config

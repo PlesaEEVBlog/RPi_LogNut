@@ -7,7 +7,6 @@ else
   echo "Other version of Raspbian detected"
 fi
 
-
 kernel_version=`uname -a|awk '{print $3}'`
 if [ $kernel_version != "4.4.38-v7+" ]
 then

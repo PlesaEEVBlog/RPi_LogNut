@@ -35,6 +35,8 @@ sudo apt-get -y autoremove
 #sudo rpi-source
 cd /
 cd opt
+# wget https://sourceforge.net/code-snapshots/svn/l/li/linux-gpib/code/linux-gpib-code-1655-trunk.zip
+# tar ....
 sudo svn checkout http://svn.code.sf.net/p/linux-gpib/code/trunk/linux-gpib/ linux-gpib
 cd linux-gpib
 sudo ./bootstrap

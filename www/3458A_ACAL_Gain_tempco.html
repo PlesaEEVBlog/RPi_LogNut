@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body { font: 12px Arial;}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="/d3js.org/d3.v3.min.js"></script> 
+
+<script>
+
+var margin = {top: 30, right: 40, bottom: 30, left: 90},
+    width = 1800 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
+
+var x = d3.scale.linear().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(10);
+
+var yAxisLeft = d3.svg.axis().scale(y)
+    .orient("left").ticks(10);
+
+
+var valueline = d3.svg.line()
+     .interpolate("basis")
+    .x(function(d) { return x(d.Temperature); })
+    .y(function(d) { return y(d.DCV_Gain); });
+        
+var valueline1 = d3.svg.line()
+    .interpolate("basis")
+    .x(function(d) { return x(d.Temperature); })
+    .y(function(d) { return y1(d.Temperature); });    
+  
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("/logs/3458A_ACAL_DCV_Log.csv", function(error, data) {
+    data.forEach(function(d) {
+        d.DCV_Gain = +d.DCV_Gain; 
+        d.Temperature = +d.Temperature; 
+    });
+
+    // Scale the range of the data
+    //x.domain(d3.extent(data, function(d) { return d.Timestamp; }));
+    x.domain([d3.min(data, function(d) { return Math.min(d.Temperature); }), d3.max(data, function(d) { return Math.max(d.Temperature); })])
+    y.domain([d3.min(data, function(d) { return Math.min(d.DCV_Gain); }), d3.max(data, function(d) { return Math.max(d.DCV_Gain); })]); 
+
+
+    svg.append("path")        // Add the valueline path.
+        .style("stroke", "steelblue") 
+        .attr("d", valueline(data));  
+
+    svg.append("g")            // Add the X Axis
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .style("fill", "steelblue")
+        .call(yAxisLeft);	
+});
+
+</script>
+</body>

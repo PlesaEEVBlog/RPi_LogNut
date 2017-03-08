@@ -8,9 +8,9 @@ else
 fi
 
 kernel_version=`uname -a|awk '{print $3}'`
-if [ $kernel_version != "4.4.38-v7+" ]
+if [ $kernel_version != "4.4.50-v7+" ]
 then
-  echo "Kernel version is not 4.4.38, running update,upgrate and dist-upgrade"
+  echo "Kernel version is not 4.4.50, running update,upgrate and dist-upgrade"
   sudo apt-get update
   sudo apt-get -y upgrade
   sudo apt-get -y dist-upgrade

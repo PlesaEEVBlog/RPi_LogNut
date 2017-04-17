@@ -7,22 +7,22 @@ else
   echo "Other version of Raspbian detected"
 fi
 
-kernel_version=`uname -a|awk '{print $3}'`
-if [ $kernel_version != "4.4.50-v7+" ]
-then
-  echo "Kernel version is not 4.4.50, running update,upgrate and dist-upgrade"
-  sudo apt-get update
-  sudo apt-get -y upgrade
-  sudo apt-get -y dist-upgrade
-  sudo apt-get -y remove raspberrypi-kernel
-  sudo apt-get -y install raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-bootloader
-  echo "Raspberry Pi needs to reboot to load new kernel and then run script again"
-  read -p "Press enter to continue"
-  exit
-else
-  echo "Proper kernel detected"
-  read -p "Press enter to continue"
-fi
+#kernel_version=`uname -a|awk '{print $3}'`
+#if [ $kernel_version != "4.4.50-v7+" ]
+#then
+#  echo "Kernel version is not 4.4.50, running update,upgrate and dist-upgrade"
+#  sudo apt-get update
+#  sudo apt-get -y upgrade
+#  sudo apt-get -y dist-upgrade
+#  sudo apt-get -y remove raspberrypi-kernel
+#  sudo apt-get -y install raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-bootloader
+#  echo "Raspberry Pi needs to reboot to load new kernel and then run script again"
+#  read -p "Press enter to continue"
+#  exit
+#else
+#  echo "Proper kernel detected"
+#  read -p "Press enter to continue"
+#fi
 
 sudo apt-get update
 sudo apt-get -y upgrade

@@ -29,7 +29,7 @@ sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 sudo apt-get -y install raspberrypi-kernel raspberrypi-kernel-headers raspberrypi-bootloader
 sudo apt-get -y install screen mc i2c-tools samba samba-common-bin bc python-dev rpi-update tk-dev build-essential texinfo texi2html libcwidget-dev libncurses5-dev libx11-dev binutils-dev bison flex libusb-1.0-0 libusb-dev libmpfr-dev libexpat1-dev tofrodos subversion autoconf automake libtool
-sudo apt-get -y purge wolfram-engine sonic-pi scratch
+sudo apt-get -y purge wolfram-engine sonic-pi scratch minecraft-pi
 sudo apt-get -y autoremove
 #sudo wget https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source -O /usr/bin/rpi-source && sudo chmod +x /usr/bin/rpi-source && /usr/bin/rpi-source -q --tag-update
 #sudo rpi-source

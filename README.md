@@ -6,5 +6,8 @@ Restore it to SD card and after automatic resize run
 
 curl https://raw.githubusercontent.com/PlesaEEVBlog/RPi_LogNut/master/Install_GPIB_Support.sh | sudo bash
 
-This version is working with kernel 4.4.50
+This version is working with kernel 4.4.50 and 4.9.24 on both RPi0, RPi0W, RPi2,RPi3 supported
 Used linux-gpib-4.0.4rc2 where is patched support issue for NI GPIB-USB HS adapter
+
+After kernel update run 
+curl https://raw.githubusercontent.com/PlesaEEVBlog/RPi_LogNut/master/Update_GPIB.sh | sudo bash

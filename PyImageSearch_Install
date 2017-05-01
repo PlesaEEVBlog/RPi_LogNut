@@ -20,6 +20,8 @@ unzip opencv_contrib.zip
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 
+sudo pip install dropbox
+
 cd ~/PyImageSearch/opencv-3.1.0/
 mkdir build
 cd build

@@ -5,13 +5,15 @@ import sys
 import Gpib
 import time
 
-# GPIB Address = 22
+# GPIB Address = 24
 inst = Gpib.Gpib(0,24, timeout=60) 
-inst.clear()  
+inst.clear() 
+
+# show instrument name and version
 inst.write("G8")
 print(inst.read())
 
-# VDC
+# configure for VDC measurement
 inst.write("F1")
 
 # 20V range

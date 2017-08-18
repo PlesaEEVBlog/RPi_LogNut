@@ -21,7 +21,7 @@ inst.write("R3")
 inst.write("S0")
 
 # external trigger by GPIB command "?" for measurment
-inst.write("S0")
+inst.write("T1")
 
 while True:
     time.sleep(1)

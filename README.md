@@ -12,11 +12,14 @@ Used linux-gpib-4.0.4rc2 where is patched support issue for NI GPIB-USB HS adapt
 After kernel update run 
 curl https://raw.githubusercontent.com/PlesaEEVBlog/RPi_LogNut/master/Update_GPIB.sh | sudo bash
 
-Setup webserver and Samba
+Setup webserver and Samba :
 curl https://raw.githubusercontent.com/PlesaEEVBlog/RPi_LogNut/master/Web_Samba.sh | sudo bash
-set Samba password: sudo smbpasswd -a pi
 
-Overclock SD card
+Set Samba password :
+sudo smbpasswd -a pi
+
+Overclock SD card :
 sudo bash -c 'printf "dtoverlay=sdtweak,overclock_50=80\n" >> /boot/config.txt'
-Test overclock
+
+Test overclock :
 curl http://www.nmacleod.com/public/sdbench.sh | sudo bash

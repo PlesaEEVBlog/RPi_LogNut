@@ -1,11 +1,12 @@
 #!//bin/bash
-Raspbian_version=`egrep "jessie|wheezy" /etc/os-release`
-if [ `echo $Raspbian_version|grep -c "jessie"` == 1 ]
-then
-  echo "Raspbian Jessie detected"
-else
-  echo "Other version of Raspbian detected"
-fi
+
+#Raspbian_version=`egrep "jessie|wheezy" /etc/os-release`
+#if [ `echo $Raspbian_version|grep -c "jessie"` == 1 ]
+#then
+#  echo "Raspbian Jessie detected"
+#else
+#  echo "Other version of Raspbian detected"
+#fi
 
 #kernel_version=`uname -a|awk '{print $3}'`
 #if [ $kernel_version != "4.4.50-v7+" ]

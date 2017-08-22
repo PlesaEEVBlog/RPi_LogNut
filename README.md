@@ -15,9 +15,6 @@ curl https://raw.githubusercontent.com/PlesaEEVBlog/RPi_LogNut/master/Update_GPI
 Setup webserver and Samba :
 curl https://raw.githubusercontent.com/PlesaEEVBlog/RPi_LogNut/master/Web_Samba.sh | sudo bash
 
-Set Samba password :
-sudo smbpasswd -a pi
-
 Overclock SD card :
 sudo bash -c 'printf "dtoverlay=sdtweak,overclock_50=80\n" >> /boot/config.txt'
 

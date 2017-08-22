@@ -62,6 +62,10 @@ sudo bash -c 'printf "   only guest=no\n" >> /etc/samba/smb.conf'
 sudo bash -c 'printf "   create mask=0777\n" >> /etc/samba/smb.conf'
 sudo bash -c 'printf "   directory mask=0777\n" >> /etc/samba/smb.conf'
 sudo bash -c 'printf "   public=no\n" >> /etc/samba/smb.conf'
+echo "------------DONE---------------------"
 
 # set Password for Samba
-sudo smbpasswd -a pi
+echo "Run"
+echo "sudo smbpasswd -a pi"
+echo "to set Samba password"
+

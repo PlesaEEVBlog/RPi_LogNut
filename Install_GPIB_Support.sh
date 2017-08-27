@@ -77,6 +77,12 @@ echo "Agilent 82357B found"
 sudo modprobe agilent_82357a
 fi
 
+if lsusb | grep -q '0957:0718'; then
+sudo sed -i 's/ni_pci/agilent_82357a/g' /etc/gpib.conf
+echo "Agilent 82357B found"
+sudo modprobe agilent_82357a
+fi
+
 if lsusb | grep -q '3923:709b'; then
 sudo sed -i 's/ni_pci/ni_usb_b/g' /etc/gpib.conf
 echo "National Instruments NI GPIB-USB-HS found"

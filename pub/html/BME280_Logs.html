@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body { font: 12px Arial;}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="/d3js.org/d3.v3.min.js"></script> 
+
+<script>
+
+var margin = {top: 30, right: 55, bottom: 30, left: 80},
+    width = 1800 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
+
+var parseTimeStamp = d3.time.format("%d/%m/%Y-%H:%M:%S").parse;
+
+var x = d3.time.scale().range([0, width]);
+var y0 = d3.scale.linear().range([height, 0]);
+var y1 = d3.scale.linear().range([height, 0]);
+var y2 = d3.scale.linear().range([height, 0]);
+
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(20);
+
+var yAxisLeft = d3.svg.axis().scale(y0)
+    .orient("left").ticks(10);
+
+var yAxisRight = d3.svg.axis().scale(y1)
+    .orient("right").ticks(10); 
+
+var yAxisRight2 = d3.svg.axis().scale(y2)
+    .orient("right").ticks(10);    
+
+var valueline = d3.svg.line()
+     .interpolate("basis")
+    .x(function(d) { return x(d.TimeStamp); })
+    .y(function(d) { return y0(d.BME_A_Temperature); });
+    
+var valueline1 = d3.svg.line()
+    .interpolate("basis")
+    .x(function(d) { return x(d.TimeStamp); })
+    .y(function(d) { return y1(d.BME_A_Pressure); });
+    
+var valueline2 = d3.svg.line()
+    .interpolate("basis")
+    .x(function(d) { return x(d.TimeStamp); })
+    .y(function(d) { return y2(d.BME_A_Humidity); });    
+
+var valueline3 = d3.svg.line()
+     .interpolate("basis")
+    .x(function(d) { return x(d.TimeStamp); })
+    .y(function(d) { return y0(d.BME_B_Temperature); });
+    
+var valueline4 = d3.svg.line()
+    .interpolate("basis")
+    .x(function(d) { return x(d.TimeStamp); })
+    .y(function(d) { return y1(d.BME_B_Pressure); });
+    
+var valueline5 = d3.svg.line()
+    .interpolate("basis")
+    .x(function(d) { return x(d.TimeStamp); })
+    .y(function(d) { return y2(d.BME_B_Humidity); });  
+      
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("/logs/BME280_Log.csv", function(error, data) {
+    data.forEach(function(d) {
+        d.TimeStamp = parseTimeStamp(d.TimeStamp);
+        d.BME_A_Temperature = +d.BME_A_Temperature;
+        d.BME_B_Temperature = +d.BME_B_Temperature;
+        d.BME_A_Pressure = +d.BME_A_Pressure;
+        d.BME_B_Pressure = +d.BME_B_Pressure;  
+        d.BME_A_Humidity = +d.BME_A_Humidity;
+        d.BME_B_Humidity = +d.BME_B_Humidity; 
+    });
+
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.TimeStamp; }));
+    //Scale
+    Temperature_A_min = d3.min(data, function(d) { return Math.min(d.BME_A_Temperature); });
+    Temperature_A_max = d3.max(data, function(d) { return Math.max(d.BME_A_Temperature); });
+    Temperature_B_min = d3.min(data, function(d) { return Math.min(d.BME_B_Temperature); });
+    Temperature_B_max = d3.max(data, function(d) { return Math.max(d.BME_B_Temperature); });
+    if (Temperature_A_min < Temperature_B_min) { Temperature_min = Temperature_A_min; } else { Temperature_min = Temperature_B_min; }
+    if (Temperature_A_max > Temperature_B_max) { Temperature_max = Temperature_A_max; } else {Temperature_max = Temperature_B_max; }
+    y0.domain([Temperature_min, Temperature_max]); 
+    //y0.domain([d3.min(data, function(d) { return Math.min(d.BME_A_Temperature); }), d3.max(data, function(d) { return Math.max(d.BME_A_Temperature); })]); 
+    Pressure_A_min = d3.min(data, function(d) { return Math.min(d.BME_A_Pressure); });
+    Pressure_A_max = d3.max(data, function(d) { return Math.max(d.BME_A_Pressure); });
+    Pressure_B_min = d3.min(data, function(d) { return Math.min(d.BME_B_Pressure); });
+    Pressure_B_max = d3.max(data, function(d) { return Math.max(d.BME_B_Pressure); });
+    if (Pressure_A_min < Pressure_B_min) { Pressure_min = Pressure_A_min; } else { Pressure_min = Pressure_B_min; }
+    if (Pressure_A_max > Pressure_B_max) { Pressure_max = Pressure_A_max; } else {Pressure_max = Pressure_B_max; }
+    y1.domain([Pressure_min, Pressure_max]);
+    //y1.domain([d3.min(data, function(d) { return Math.min(d.BME_A_Pressure); }), d3.max(data, function(d) { return Math.max(d.BME_A_Pressure); })]);
+    Humidity_A_min = d3.min(data, function(d) { return Math.min(d.BME_A_Humidity); });
+    Humidity_A_max = d3.max(data, function(d) { return Math.max(d.BME_A_Humidity); });
+    Humidity_B_min = d3.min(data, function(d) { return Math.min(d.BME_B_Humidity); });
+    Humidity_B_max = d3.max(data, function(d) { return Math.max(d.BME_B_Humidity); });
+    if (Humidity_A_min < Humidity_B_min) { Humidity_min = Humidity_A_min; } else { Humidity_min = Humidity_B_min; }
+    if (Humidity_A_max > Humidity_B_max) { Humidity_max = Humidity_A_max; } else {Humidity_max = Humidity_B_max; }
+    y2.domain([Humidity_min, Humidity_max]);    
+    //y2.domain([d3.min(data, function(d) { return Math.min(d.BME_A_Humidity); }), d3.max(data, function(d) { return Math.max(d.BME_A_Humidity); })])
+
+    svg.append("path")        // Add the valueline path.
+        .style("stroke", "steelblue") 
+        .attr("d", valueline(data));  
+
+    svg.append("path")        // Add the valueline path.
+        .style("stroke", "green")
+        .attr("d", valueline1(data));
+         
+    svg.append("path")        // Add the valueline2 path.
+        .style("stroke", "red") 
+        .attr("d", valueline2(data)); 
+        
+    svg.append("path")        // Add the valueline2 path.
+        .style("stroke", "yellow") 
+        .attr("d", valueline3(data));  
+        
+    svg.append("path")        // Add the valueline2 path.
+        .style("stroke", "purple") 
+        .attr("d", valueline4(data));  
+        
+    svg.append("path")        // Add the valueline2 path.
+        .style("stroke", "brown") 
+        .attr("d", valueline5(data));              
+
+    svg.append("g")            // Add the X Axis
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .style("fill", "steelblue")
+        .call(yAxisLeft);	
+
+    svg.append("g")				
+        .attr("class", "y axis")	
+        .attr("transform", "translate(" + width + " ,0)")	
+        .style("fill", "green")		
+        .call(yAxisRight);
+    
+    svg.append("g")				
+        .attr("class", "y axis")	
+        .attr("transform", "translate(" + width + " ,0)")	
+        .style("fill", "red")		
+        .call(yAxisRight2);    
+
+});
+
+</script>
+</body>
